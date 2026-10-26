@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Saavy Naturals · Brand Store Design</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: built only from Amazon Store Builder primitives — full-width tiles, or two halves of Large / 2×Medium / 4×Small / Medium+2×Small. Brand type lives inside image tiles; native text tiles use Amazon's own sans. */
+:root{
+  --ink:#1b2420; --muted:#5f6a64; --line:#e7e3dc; --forest:#23392a; --navy:#1f2e38; --wine:#6e1626; --cream:#f4efe7;
+  --V:#3f6f8c; --Vt:#dfe9ef; --C:#4a6535; --Ct:#e3e9da; --L:#6d4a78; --Lt:#ebe2ee; --O:#c36d24; --Ot:#f6e6d4; --R:#a8405f; --Rt:#f3dfe5;
+  --amz:#131921; --amz2:#232f3e; --star:#de7921; --link:#007185; --prime:#1a98ff;
+  --disp:"Libre Caslon Display","Big Caslon",Georgia,serif;
+  --ital:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --brand:"Source Sans 3","Source Sans Pro",Arial,sans-serif;
+  --amzfont:"Amazon Ember",Arial,"Helvetica Neue",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#0f1111;font-family:var(--amzfont);font-size:14px;line-height:1.45}
+button{font:inherit;color:inherit}
+img,video{display:block;max-width:100%}
+.shell{max-width:1500px;margin:0 auto;container-type:inline-size}
+/* amazon chrome */
+.amzbar{background:var(--amz);color:#fff;display:flex;gap:14px;align-items:center;padding:9px max(16px,env(safe-area-inset-right,0px)) 9px max(16px,env(safe-area-inset-left,0px));font-size:12px}
+.amzbar b{font-size:18px;letter-spacing:-.02em}.amzbar .s{flex:1;min-width:0;height:30px;background:#fff;border-radius:4px;display:flex;justify-content:flex-end;overflow:hidden}.amzbar .s i{width:42px;background:#febd69}
+.amzbar2{height:10px;background:var(--amz2)}
+/* store header: hero 3000×600 (5:1), no logo in the image; logo is its own square element */
+.hero{aspect-ratio:5/1;overflow:hidden;background:#ddd}
+.hero img{width:100%;height:100%;object-fit:cover}
+.brandbar{display:flex;align-items:center;gap:14px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid #ddd}
+.logo{width:76px;height:76px;background:#fff;border:1px solid #ddd;display:grid;place-items:center;padding:6px;margin-top:-34px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.logo img{width:100%;height:auto}
+.brandbar b{font-size:16px}.brandbar .fo{border:1px solid #888;border-radius:999px;padding:3px 14px;font-size:12px}
+.nav{display:flex;gap:2px;align-items:center;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid #ddd;position:relative;z-index:5;background:#fff}
+.nav .w{position:relative}
+.nav button{all:unset;cursor:pointer;font-size:13px;padding:12px 10px;border-bottom:2px solid transparent;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
+.nav button[aria-current="true"]{border-color:#0f1111;font-weight:700}
+.nav button:focus-visible{outline:2px solid var(--link)}
+.dd{position:absolute;top:100%;left:0;background:#fff;border:1px solid #ddd;box-shadow:0 10px 24px rgba(0,0,0,.14);min-width:230px;padding:6px 0}
+.dd button{display:flex;gap:10px;align-items:center;width:100%;text-transform:none;letter-spacing:0;padding:8px 14px;border:0}
+.dd button:hover{background:#f3f3f3}
+.dd i{width:10px;height:10px;border-radius:50%;display:block}
+/* page = stack of sections */
+.page{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:14px max(16px,env(safe-area-inset-right,0px)) 30px max(16px,env(safe-area-inset-left,0px))}
+.sec2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.half{display:grid;gap:14px;aspect-ratio:1;min-width:0}
+.half.s4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.half.m2{grid-template-rows:1fr 1fr}
+.half.ms{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.half.ms>:first-child{grid-column:span 2}
+/* tiles */
+.t{all:unset;position:relative;overflow:hidden;display:block;min-width:0;min-height:0;background:var(--bg,#f4f2ee)}
+button.t{cursor:pointer}
+button.t:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.t>img,.t>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.t>img.contain{object-fit:cover;mix-blend-mode:multiply}
+button.t>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+button.t:hover>img{transform:scale(1.04)}
+.fw{position:relative;overflow:hidden;background:var(--bg,#f4f2ee)}
+.fw>img,.fw>video{width:100%;height:100%;object-fit:cover;display:block}
+/* baked image text (brand fonts live inside image assets) */
+.bk{position:absolute;z-index:1;display:grid;gap:8px;color:var(--fg,#1b2420);font-family:var(--brand)}
+.bk .k{font-size:clamp(10px,.9cqi,13px);letter-spacing:.24em;text-transform:uppercase;font-weight:600}
+.bk h2{margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(26px,4.4cqi,72px);line-height:.95}
+.bk h3{margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(20px,2.6cqi,40px);line-height:1}
+.bk h4{margin:0;font-family:var(--ital);font-style:italic;font-weight:400;font-size:clamp(15px,1.5cqi,22px);line-height:1.05}
+.bk em{font-family:var(--ital);font-style:italic}
+.bk p{margin:0;font-size:clamp(13px,1.15cqi,17px);max-width:40ch}
+.bk .cta{justify-self:start;display:inline-block;font-size:clamp(10px,.85cqi,12px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:10px 18px;border-radius:999px;background:var(--ctab,#1b2420);color:var(--ctaf,#fff);margin-top:6px}
+.bk.bl{left:6%;bottom:7%}.bk.tl{left:7%;top:8%}.bk.cl{left:8%;top:50%;transform:translateY(-50%);right:8%}.bk.br{right:6%;bottom:7%;text-align:right;justify-items:end}
+.bk.lab{left:8%;bottom:7%;gap:2px}
+.t.ct>img{height:80%;bottom:auto}
+.t.ct .bk{left:0;right:0;bottom:0;top:auto;transform:none;padding:4% 8% 6%;background:var(--bg,#f4f2ee);gap:2px}
+.t.ct .bk p{font-size:clamp(12px,1cqi,15px)}
+.half:not(.s4):not(.ms):not(.m2) .t.ct>img{height:76%}
+.scrim::after{content:"";position:absolute;inset:0;background:var(--scrim,linear-gradient(transparent 45%,rgba(0,0,0,.55)))}
+.num{position:absolute;right:6%;top:4%;font-family:var(--disp);font-size:clamp(60px,12cqi,200px);line-height:.8;color:var(--c);opacity:.16;z-index:0}
+/* heading strip = full-width image tile, variable height */
+.strip{padding:clamp(16px,2.4cqi,34px) 0 4px;display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid var(--line)}
+.strip h2{margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(26px,3.6cqi,54px);line-height:1}
+.strip h2 em{font-family:var(--ital)}
+.strip .k{font-family:var(--brand);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+/* native text tile (Amazon font) */
+.tt{background:var(--bg,#fff);padding:clamp(18px,2.4cqi,34px);font-family:var(--amzfont);color:#0f1111;min-width:0}
+.tt h3{margin:0 0 8px;font-size:clamp(17px,1.6cqi,22px);font-weight:700}
+.tt p{margin:0 0 8px;max-width:80ch}
+.tt .row{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14px}
+.tt .row span::before{content:"✓ ";color:var(--C)}
+.tt.center{text-align:center}.tt.center .row{justify-content:center}
+.tt dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0}
+.tt dt{font-weight:700}.tt dd{margin:0}
+/* native product grid / widgets */
+.gh{font-size:18px;font-weight:700;margin:4px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.pc{display:grid;gap:4px;font-size:13px;align-content:start;min-width:0}
+.pc .im{aspect-ratio:1;background:#f7f7f7;display:grid;place-items:center}
+.pc .im img{width:90%;height:90%;object-fit:contain;mix-blend-mode:multiply}
+.pc .nm{line-height:1.3;max-height:2.6em;overflow:hidden}
+.pc .rt{color:var(--star);font-size:12px}.pc .rt span{color:var(--link)}
+.pc .pr{font-size:18px}.pc .pr sup{font-size:11px}
+.pc .pm{font-size:11px;color:var(--prime);font-weight:700;font-style:italic}
+.bsw{border:1px solid #ddd;padding:14px}
+.bsw .grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+/* product tile (single ASIN) */
+.ptile{display:grid;grid-template-rows:1fr auto;background:#fff;border:1px solid #eee}
+.ptile .im{background:#f7f7f7;display:grid;place-items:center;overflow:hidden;min-height:0}
+.ptile .im img{width:80%;height:80%;object-fit:contain;mix-blend-mode:multiply}
+.ptile .info{padding:10px 14px;font-size:13px;display:grid;gap:2px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.gal img{aspect-ratio:2/1;width:100%;object-fit:cover}
+.gal img:nth-child(1),.gal img:nth-child(6){grid-column:span 2}
+/* matrix graphic (one static image tile) */
+.mxg{background:#fff;border:1px solid var(--line);padding:clamp(14px,2cqi,28px);overflow-x:auto}
+.mxg table{border-collapse:collapse;width:100%;min-width:680px}
+.mxg th{font-family:var(--ital);font-style:italic;font-weight:400;font-size:17px;padding:0 4px 12px}
+.mxg th b{display:block;font-family:var(--disp);font-style:normal;font-size:30px;line-height:1}
+.mxg td{padding:3px}
+.mxg td.l{font-family:var(--brand);font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;white-space:nowrap;padding-right:12px}
+.mxg .c{aspect-ratio:1;background:var(--t)}
+.mxg .c img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:#565959;padding-top:14px;border-top:1px solid #ddd}
+@container (max-width:760px){
+  .sec2{grid-template-columns:minmax(0,1fr)}
+  .grid,.bsw .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gal img:nth-child(n){grid-column:auto}
+  .logo{width:60px;height:60px;margin-top:-24px}
+  .nav{overflow-x:auto}
+  .bk h2{font-size:clamp(26px,8cqi,44px)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="shell">
+  <div class="amzbar"><b>amazon</b><div class="s"><i></i></div><span>Deliver to New York 10001</span></div>
+  <div class="amzbar2"></div>
+  <div class="hero" id="hero"></div>
+  <div class="brandbar"><div class="logo"><img src="v3/ph/logo.png" alt="Saavy Naturals"></div><b>Saavy Naturals</b><span class="fo">Follow</span></div>
+  <nav class="nav" id="nav" aria-label="Store navigation"></nav>
+  <main class="page" id="page"></main>
+</div>
+
+<script>
+const IMG=a=>`img/p_${a}.jpg`, PH=n=>`v2/ph/${n}.jpg`, SC=n=>`v2/ph/sc_${n}.jpg`;
+const P={
+B07QRXS2YT:["Tahitian Vanilla Body Cream","12.99",4.3,"366"],B09NQNF76B:["Tahitian Vanilla Body Cream, 2-Pack","29.48",4.3,"366"],B0FYNPMGTK:["Tropical Coconut Body Cream","14.99",4.3,"366"],B0BJ29KJF5:["Tropical Coconut Body Cream, 2-Pack","19.60",4.3,"366"],
+B07QLNXYVR:["Lavender Chamomile Body Cream","14.99",4.3,"366"],B09NQMBV6X:["Lavender Chamomile Body Cream, 2-Pack","24.75",4.3,"366"],B0BJ2G8951:["Sweet Orange Body Cream","12.99",4.3,"366"],B0BKG2KR3W:["Sweet Orange Body Cream, 2-Pack","27.83",4.3,"366"],
+B0949KT8ZF:["Bulgarian Rose Body Cream","14.99",4.3,"366"],B09NQN18LY:["Bulgarian Rose Body Cream, 2-Pack","24.99",4.3,"366"],
+B07QMP5CWL:["Tahitian Vanilla Body Wash","10.56",4.3,"219"],B09NQLXLT3:["Tahitian Vanilla Body Wash, 2-Pack","24.99",4.3,"219"],B0FYNKSBF7:["Tropical Coconut Body Wash","13.99",4.3,"219"],B0FDHZY6S2:["Tropical Coconut Body Wash, Multi-Pack","40.03",4.3,"219"],
+B07QQVP859:["Lavender Chamomile Body Wash","12.09",4.3,"219"],B09NQNGPP2:["Lavender Chamomile Body Wash, 2-Pack","24.94",4.3,"219"],B0FYNCXX4Y:["Sweet Orange Body Wash","13.99",4.3,"219"],B0FDJ6SQ3P:["Sweet Orange Body Wash, 2-Pack","24.99",4.3,"219"],
+B0949JV8BV:["Bulgarian Rose Body Wash","10.00",4.3,"219"],B09NQNLRLK:["Bulgarian Rose Body Wash, 2-Pack","22.35",4.3,"219"],
+B09RHTPV77:["Tahitian Vanilla Bath Bombs, 2 × 6 oz","15.00",4.5,"39"],B09RHVXHQJ:["Tropical Coconut Bath Bombs, 2 × 6 oz","11.99",3.7,"9"],B09RHVVKNK:["Lavender Chamomile Bath Bombs, 2 × 6 oz","11.99",3.4,"6"],B09RHWWHY6:["Sweet Orange Bath Bombs, 2 × 6 oz","23.98",3.0,"2"],
+B07R6YFQBL:["Tahitian Vanilla Sugar Scrub","19.97",4.6,"42"],B0BJ2932Z3:["Tropical Coconut Sugar Scrub","19.97",5.0,"1"],B091MNJHD9:["Bulgarian Rose Sugar Scrub","19.97",4.1,"34"],B07RCMMJRH:["Lavender Chamomile Salt Scrub","19.97",4.4,"6"],B0BJ2M8XGB:["Sweet Orange Salt Scrub","19.97",3.5,"4"],
+B0G2KJV55Q:["Tahitian Vanilla Whipped Body Butter","23.99",4.4,"46"],B0G2L5RRDH:["Tropical Coconut Whipped Body Butter","23.99",4.4,"46"],B0G2LCWW9Y:["Lavender Rosewood Whipped Body Butter","23.99",4.4,"46"],B0G2L9SYP1:["Yuzu & Meyer Lemon Whipped Body Butter","23.99",4.4,"46"],B0G2LBPP3M:["Palo Santo Sandalwood Whipped Body Butter","23.99",4.4,"46"],
+B09MQYNGPN:["Tahitian Vanilla Liquid Hand Soap, 2-Pack","17.98",4.4,"319"],B0BJ2NP2DD:["Lavender Chamomile Hand Wash, 2-Pack","16.24",4.4,"319"],B09NQLBL2F:["Sweet Orange Liquid Hand Soap, 2-Pack","17.98",4.4,"319"],
+B07R7B7KCB:["Tahitian Vanilla Handmade Soap Bar, 2-Pack","12.99",4.4,"127"],B0BJ27D4T8:["Tropical Coconut Handmade Soap Bar, 2-Pack","12.99",4.4,"127"],B07R7DM9RH:["Lavender Chamomile Handmade Soap Bar, 2-Pack","12.99",4.4,"127"],B0BJ2CH99V:["Sweet Orange Handmade Soap Bar, 2-Pack","12.99",4.4,"127"],B0949JBK7X:["Bulgarian Rose Handmade Soap Bar, 2-Pack","12.99",4.4,"127"],
+B07TVKLRMH:["Artisan Soap Variety Set","18.99",4.3,"1,480"],B0G23CHWZF:["Artisan Soap Pack, 12 Squares","24.99",4.3,"1,480"],B0GDRZK6H8:["Clean Variety Soap Gift Pack, 6 Bars","35.99",4.4,"127"],B0G22WSD9J:["Mini Heart Soap Gift Set","12.99",4.3,"1,480"],B0G233Y2JD:["Mini Heart Soap Gift Set, Large","24.99",4.3,"1,480"],
+B0G224SRZT:["Plumeria Violet Soap Loaf with Cutter","29.99",4.3,"1,480"],B0G225KJ71:["Mango Papaya Soap Loaf with Cutter","29.99",4.3,"1,480"],B0G225KK5P:["Minty Oat Soap Loaf with Cutter","29.99",4.3,"1,480"],B0G23DWZD9:["Patchouli Rose Soap Loaf with Cutter","29.99",4.3,"1,480"],B0G236M5B6:["Citrus Soap Loaf with Cutter","29.99",4.3,"1,480"],
+B0GDS5Q29D:["9-Piece Spa Gift Basket, Lavender Chamomile","79.99",4.4,"176"],B07RRZ6BLM:["Spa Gift Basket, Tahitian Vanilla","79.99",4.4,"176"],B0GDRRK87W:["9-Piece Spa Gift Set","79.99",4.4,"176"]
+};
+const S={V:{no:"01",n:"Tahitian Vanilla",c:"var(--V)",t:"var(--Vt)",hex:"#3f6f8c",mood:"Warm, creamy and cozy",hdr:"DSC09917"},
+ C:{no:"02",n:"Tropical Coconut",c:"var(--C)",t:"var(--Ct)",hex:"#4a6535",mood:"Sunny and fresh",hdr:"DSC09910"},
+ L:{no:"03",n:"Lavender Chamomile",c:"var(--L)",t:"var(--Lt)",hex:"#6d4a78",mood:"Calm and soft",hdr:"DSC09868"},
+ O:{no:"04",n:"Sweet Orange",c:"var(--O)",t:"var(--Ot)",hex:"#c36d24",mood:"Bright and juicy",hdr:"DSC09799"},
+ R:{no:"05",n:"Bulgarian Rose",c:"var(--R)",t:"var(--Rt)",hex:"#a8405f",mood:"Floral and romantic",hdr:"DSC03757"}};
+const SO=["V","C","L","O","R"];
+const SP={cream:{V:"IMG0060",C:"IMG0022",L:"IMG0033",O:"IMG0018",R:"IMG0063"},wash:{V:"IMG0065",C:"IMG0085",L:"IMG0078",O:"IMG0091",R:"IMG0048"},scrub:{V:"IMG0062",C:"IMG0029",L:"IMG0056_1",O:"IMG0036",R:"IMG0039"},
+ bombs:{V:"IMG0043_1",C:"IMG0035",L:"IMG0055",O:"IMG0010"},butter:{V:"IMG0056",C:"IMG0077",L:"IMG0031_1"},bar:{V:"IMG0082",C:"IMG0067",L:"IMG0012_1",O:"IMG0032",R:"IMG0065_1"},hand:{V:"IMG0012",O:"IMG0029_1",L:"IMG0094"}};
+const AS={cream:{V:"B07QRXS2YT",C:"B0FYNPMGTK",L:"B07QLNXYVR",O:"B0BJ2G8951",R:"B0949KT8ZF"},wash:{V:"B07QMP5CWL",C:"B0FYNKSBF7",L:"B07QQVP859",O:"B0FYNCXX4Y",R:"B0949JV8BV"},scrub:{V:"B07R6YFQBL",C:"B0BJ2932Z3",L:"B07RCMMJRH",O:"B0BJ2M8XGB",R:"B091MNJHD9"},
+ bombs:{V:"B09RHTPV77",C:"B09RHVXHQJ",L:"B09RHVVKNK",O:"B09RHWWHY6"},butter:{V:"B0G2KJV55Q",C:"B0G2L5RRDH",L:"B0G2LCWW9Y"},bar:{V:"B07R7B7KCB",C:"B0BJ27D4T8",L:"B07R7DM9RH",O:"B0BJ2CH99V",R:"B0949JBK7X"},hand:{V:"B09MQYNGPN",O:"B09NQLBL2F",L:"B0BJ2NP2DD"}};
+const FN={wash:"Body Wash",scrub:"Body Scrub",bombs:"Bath Bombs",cream:"Body Cream",butter:"Whipped Butter",bar:"Soap Bar",hand:"Hand Soap"};
+const RIT=["wash","scrub","bombs","cream","butter","bar","hand"];
+
+/* ---- section primitives (only Store Builder shapes) ---- */
+const FW=(inner,{bg,ratio,go,cls=""}={})=>`<${go?`button data-go="${go}"`:"div"} class="fw ${cls}" style="${bg?`--bg:${bg};`:""}${ratio?`aspect-ratio:${ratio};`:""}">${inner}</${go?"button":"div"}>`;
+const SEC=(a,b)=>`<section class="sec2">${a}${b}</section>`;
+const L=t=>`<div class="half">${t}</div>`;
+const S4=(a,b,c,d)=>`<div class="half s4">${a}${b}${c}${d}</div>`;
+const M2=(a,b)=>`<div class="half m2">${a}${b}</div>`;
+const MS=(m,s1,s2)=>`<div class="half ms">${m}${s1}${s2}</div>`;
+/* image tile; text inside is part of the image asset */
+const T=(img,{go,bg,contain,txt,pos="bl",fg,scrim,num,c}={})=>`<${go?`button data-go="${go}"`:"div"} class="t${scrim?" scrim":""}${contain&&txt?" ct":""}" style="${bg?`--bg:${bg};`:""}${scrim&&scrim!==true?`--scrim:${scrim};`:""}${c?`--c:${c};`:""}">${img?`<img src="${img}" alt="" class="${contain?"contain":""}">`:""}${num?`<span class="num">${num}</span>`:""}${txt?`<div class="bk ${pos}" style="${fg?`--fg:${fg};`:""}">${txt}</div>`:""}</${go?"button":"div"}>`;
+const BGV=(n,txt,pos="bl")=>FW(`<video autoplay muted loop playsinline preload="auto" poster="v3/vid/${n}_poster.jpg"><source src="v3/vid/${n}.mp4" type="video/mp4"></video>${txt?`<div class="bk ${pos}" style="--fg:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)">${txt}</div>`:""}`,{ratio:n==="home"||n==="story"?"2.4/1":"2/1"});
+const STRIP=(h,k)=>`<div class="strip"><h2>${h}</h2>${k?`<span class="k">${k}</span>`:""}</div>`;
+const TT=(inner,{bg,center}={})=>`<div class="tt${center?" center":""}" style="${bg?`--bg:${bg}`:""}">${inner}</div>`;
+const stars=r=>{const f=Math.round(r*2)/2;let s="";for(let i=1;i<=5;i++)s+=i<=f?"★":(i-.5===f?"⯪":"☆");return s};
+const pc=a=>{const p=P[a];const[d,c]=p[1].split(".");return `<div class="pc"><div class="im"><img src="${IMG(a)}" alt="${p[0]}"></div><div class="nm">Saavy Naturals ${p[0]}</div><div class="rt">${stars(p[2])} <span>${p[3]}</span></div><div class="pr"><sup>$</sup>${d}<sup>${c}</sup></div><div class="pm">✓prime</div></div>`};
+const GRID=(l,title)=>`<section id="grid">${title?`<div class="gh">${title}</div>`:""}<div class="grid">${l.map(pc).join("")}</div></section>`;
+const BEST=l=>`<section class="bsw"><div class="gh">Best Sellers</div><div class="grid">${l.map(pc).join("")}</div></section>`;
+const PT=a=>{const p=P[a];const[d,c]=p[1].split(".");return `<div class="ptile"><div class="im"><img src="${IMG(a)}" alt="${p[0]}"></div><div class="info"><b>${p[0]}</b><span class="rt" style="color:var(--star)">${stars(p[2])} <span style="color:var(--link)">${p[3]}</span></span><span style="font-size:17px"><sup style="font-size:10px">$</sup>${d}<sup style="font-size:10px">${c}</sup> <span style="color:var(--prime);font-size:11px;font-weight:700;font-style:italic">✓prime</span></span></div></div>`};
+const GAL=l=>`<section class="gal">${l.map(n=>`<img src="${PH(n)}" alt="">`).join("")}</section>`;
+const FOOT=()=>`<div class="foot"><span>Saavy Naturals</span><span>Share</span></div>`;
+/* reusable baked tiles */
+const scentTile=(k,f="cream",size="L")=>{const s=S[k];return T(SC(SP[f][k]),{go:"s"+k,bg:s.t,contain:true,c:s.c,num:size==="L"?s.no:"",txt:size==="L"?`<span class="k" style="color:${s.hex}">No. ${s.no}</span><h3 style="color:${s.hex}"><em>${s.n}</em></h3><p>${s.mood}</p>`:`<h4 style="color:${s.hex}">${s.n}</h4>`,pos:"lab"})};
+const famTile=(f,k,label)=>{const s=S[k];return T(SC(SP[f][k]),{go:f===cur?"s"+k:f,bg:s.t,contain:true,txt:`<h4 style="color:${s.hex}">${label||FN[f]}</h4>`,pos:"lab"})};
+const textTile=(bg,fg,inner,go)=>T(null,{go,bg,fg,txt:inner,pos:"cl"});
+const cmpTiles=()=>SEC(L(textTile("#f4efe7",null,`<span class="k">Everyday</span><h2>Body <em>Cream</em></h2><p>Thick, creamy lotion for head to toe. 8.5 fl oz squeeze tube, in all five signature scents.</p><span class="cta">Shop body cream</span>`,"cream")),L(textTile("var(--Lt)",null,`<span class="k">Extra rich</span><h2>Whipped <em>Butter</em></h2><p>Airy, whipped shea for very dry spots and the night routine. 4 oz jar, five scents.</p><span class="cta">Shop body butter</span>`,"butter")));
+
+/* ---- pages ---- */
+const R={};
+R.home=()=>[
+ BGV("home",`<span class="k">Handcrafted in California since 2013</span><h2 style="font-size:clamp(34px,7cqi,112px)">Real. Honest.<br><em>Wellness.</em></h2><span class="cta" style="--ctab:#fff;--ctaf:#1b2420">Shop by scent</span>`),
+ TT(`<div class="row"><span>Plant-based</span><span>Vegan</span><span>Cruelty-free</span><span>Gluten-free</span><span>Soy-free</span><span>Handcrafted in small batches</span></div>`,{center:true,bg:"#f4efe7"}),
+ STRIP("Five scents. <em>Every step of the routine.</em>","The Scent Atelier"),
+ SEC(L(scentTile("V")),S4(scentTile("C","cream","S"),scentTile("L","cream","S"),scentTile("O","cream","S"),scentTile("R","cream","S"))),
+ SEC(L(T(PH("DSC03468"),{go:"gifts"})),L(textTile("var(--wine)","#fff",`<span class="k">The Holiday Gift Shop</span><h2>Give the<br><em>spa night.</em></h2><p>Ready-to-gift spa sets, heart boxes and artisan soap.</p><span class="cta" style="--ctab:#fff;--ctaf:#6e1626">Shop gifts</span>`,"gifts"))),
+ GRID(["B07QRXS2YT","B09RHTPV77","B07QMP5CWL","B07R6YFQBL","B0FYNPMGTK","B09RHVVKNK","B09MQYNGPN","B07TVKLRMH","B0G2KJV55Q","B07R7B7KCB"],"Customer favorites"),
+ SEC(L(textTile("#f4efe7",null,`<span class="k">Feel it first</span><h2>Four<br><em>textures.</em></h2><p>Cream, whipped butter, scrub and wash, each in five signature scents.</p><span class="cta">Shop by product</span>`,"products")),S4(...[["tx_CREAM","Body Cream","cream"],["tx_BODYBUTTER","Whipped Butter","butter"],["tx_SCRUB","Body Scrub","scrub"],["tx_BODYWASH","Body Wash","wash"]].map(([i,n,g])=>T(PH(i),{go:g,scrim:true,fg:"#fff",txt:`<h4>${n}</h4>`,pos:"lab"})))),
+ SEC(L(T(PH("DSC03355"),{go:"sV",scrim:true,fg:"#fff",txt:`<span class="k">The Sunday Reset</span><h3>Four steps.<br><em>One scent.</em></h3>`})),S4(...["wash","scrub","bombs","cream"].map((f,i)=>T(SC(SP[f].V),{go:f,bg:"var(--Vt)",contain:true,txt:`<h4 style="color:var(--V)">0${i+1} ${["Cleanse","Polish","Soak","Moisturize"][i]}</h4>`,pos:"lab"})))),
+ BGV("butter",`<span class="k">Introducing</span><h2>Whipped <em>Body Butter</em></h2><p>Rich shea, whipped light. Five scents, three only in a jar.</p><span class="cta" style="--ctab:#fff;--ctaf:#1b2420">Shop body butter</span>`),
+ SEC(L(T(PH("DSC03450"),{go:"story"})),L(textTile("var(--navy)","#f1ece3",`<span class="k">Our story</span><h2>Two chefs.<br><em>One rule.</em></h2><p><em>What goes on the body goes into the body.</em> Real, plant-based ingredients and nothing hidden, handcrafted in small batches in California.</p><span class="cta" style="--ctab:#fff;--ctaf:#1f2e38">Read our story</span>`,"story"))),
+ STRIP("Little rituals, <em>every day.</em>"),
+ GAL(["DSC03696","DSC03602","DSC09917","DSC03724","DSC09928","DSC03749"]),
+ TT(`<h3>Ingredient Integrity Pledge</h3><p>Made without parabens, sulfates, silicones, phenoxyethanol, propylene glycol, PEGs, petroleum or artificial colors.</p>`,{bg:"#f4efe7"}),
+ FOOT()].join("");
+
+R.best=()=>[
+ FW(`<img src="${PH("DSC03450")}" alt=""><div class="bk bl" style="--fg:#fff"><span class="k">Saavy favorites</span><h2>The ones people<br><em>reorder.</em></h2></div>`,{ratio:"3/1",cls:"scrim"}),
+ BEST(["B07QRXS2YT","B09RHTPV77","B07QMP5CWL","B07R6YFQBL","B09NQNF76B"]),
+ GRID(["B09RHVVKNK","B09NQLXLT3","B0FYNPMGTK","B0FYNKSBF7","B09MQYNGPN","B07TVKLRMH","B07R7B7KCB","B09RHVXHQJ","B0G2KJV55Q","B0BJ2932Z3"],"More favorites"),FOOT()].join("");
+
+R.products=()=>[
+ FW(`<img src="${PH("DSC03450")}" alt=""><div class="bk bl" style="--fg:#fff"><span class="k">Shop by product</span><h2>Every step<br><em>of the routine.</em></h2></div>`,{ratio:"3/1",cls:"scrim"}),
+ SEC(L(T(PH("tx_CREAM"),{go:"cream",scrim:true,fg:"#fff",txt:`<h3>Body <em>Cream</em></h3>`})),S4(...[["tx_BODYBUTTER","Whipped Butter","butter"],["tx_BODYWASH","Body Wash","wash"],["tx_SCRUB","Body Scrub","scrub"],["DSC09784","Bath Bombs","bombs"]].map(([i,n,g])=>T(PH(i),{go:g,scrim:true,fg:"#fff",txt:`<h4>${n}</h4>`,pos:"lab"})))),
+ SEC(MS(T(PH("DSC03602"),{go:"hand",scrim:true,fg:"#fff",txt:`<h4>Liquid Hand Soap</h4>`,pos:"lab"}),T(PH("DSC03477"),{go:"gifts",scrim:true,fg:"#fff",txt:`<h4>Gift Sets</h4>`,pos:"lab"}),T(PH("DSC09840"),{go:"best",scrim:true,fg:"#fff",txt:`<h4>Favorites</h4>`,pos:"lab"})),L(T(PH("DSC03679"),{go:"bar",scrim:true,fg:"#fff",txt:`<h3>Soap &amp; <em>Loaves</em></h3>`}))),
+ GRID(Object.keys(P).slice(0,20),"All products"),FOOT()].join("");
+
+R.cream=()=>[
+ BGV("cream",`<span class="k">Body Cream · 8.5 fl oz</span><h2>Thick. Creamy.<br><em>Non-greasy.</em></h2>`),
+ FW(`<img src="${PH("tx_CREAM")}" alt=""><div class="bk cl" style="text-align:center;justify-items:center"><h2>Moisture <em>that shows.</em></h2></div>`,{ratio:"3/1"}),
+ STRIP("Five scents, <em>one formula.</em>"),
+ SEC(L(scentTile("V")),S4(scentTile("C","cream","S"),scentTile("L","cream","S"),scentTile("O","cream","S"),scentTile("R","cream","S"))),
+ STRIP("Single or <em>two-pack.</em>"),
+ SEC(L(PT("B07QRXS2YT")),L(PT("B09NQNF76B"))),
+ TT(`<h3>Key ingredients</h3><dl><dt>Shea butter</dt><dd>Rich, creamy moisture</dd><dt>Kukui nut oil</dt><dd>Softens and smooths</dd><dt>Aloe vera</dt><dd>Soothing hydration</dd><dt>Jojoba oil</dt><dd>A light, non-greasy feel</dd></dl>`,{bg:"#f7f5f1"}),
+ STRIP("Cream or <em>butter?</em>"),cmpTiles(),
+ GRID(["B07QRXS2YT","B0FYNPMGTK","B07QLNXYVR","B0BJ2G8951","B0949KT8ZF","B09NQNF76B","B0BJ29KJF5","B09NQMBV6X","B0BKG2KR3W","B09NQN18LY"],"Shop body cream"),FOOT()].join("");
+
+R.butter=()=>[
+ BGV("butter",`<span class="k">Whipped Body Butter · 4 oz</span><h2>Whipped,<br><em>not heavy.</em></h2>`),
+ FW(`<img src="${PH("tx_BODYBUTTER")}" alt=""><div class="bk cl" style="--fg:#fff;text-align:right;justify-items:end;left:auto"><h2>Melts on<br><em>contact.</em></h2></div>`,{ratio:"3/1"}),
+ STRIP("Three scents, <em>only in a jar.</em>"),
+ SEC(L(T(PH("DSC03724"),{go:"butter"})),S4(...[["IMG0031_1","Lavender Rosewood","var(--Lt)","#6d4a78"],["IMG0083jpg","Yuzu & Meyer Lemon","#f7efcf","#8a6c0c"],["IMG0031","Palo Santo Sandalwood","#efe4d8","#7a4b2c"],["IMG0056","Tahitian Vanilla","var(--Vt)","#3f6f8c"]].map(([i,n,b,c])=>T(SC(i),{go:"butter",bg:b,contain:true,txt:`<h4 style="color:${c}">${n}</h4>`,pos:"lab"})))),
+ SEC(L(T(PH("DSC03741"))),L(textTile("#f4efe7",null,`<span class="k">How to use</span><h2>Scoop. Warm.<br><em>Smooth on.</em></h2><p>01 Scoop a little with a fingertip.<br>02 Warm it between the palms.<br>03 Smooth onto damp skin after the shower.</p>`))),
+ STRIP("Cream or <em>butter?</em>"),cmpTiles(),
+ GRID(["B0G2KJV55Q","B0G2L5RRDH","B0G2LCWW9Y","B0G2L9SYP1","B0G2LBPP3M"],"Shop body butter"),FOOT()].join("");
+
+R.wash=()=>[
+ BGV("wash",`<span class="k">Body Wash · 8.5 fl oz</span><h2>Rich lather,<br><em>no sulfates.</em></h2>`),
+ FW(`<img src="${PH("tx_BODYWASH")}" alt=""><div class="bk cl"><h2>Silk, <em>not suds.</em></h2></div>`,{ratio:"3/1"}),
+ TT(`<div class="row"><span>Made without sulfates</span><span>Made without parabens</span><span>Vegan</span><span>Plant-based</span><span>For men and women</span></div>`,{center:true,bg:"#f7f5f1"}),
+ STRIP("Pick a <em>scent.</em>"),
+ SEC(L(famTile("wash","V","Tahitian Vanilla")),S4(famTile("wash","C","Tropical Coconut"),famTile("wash","L","Lavender Chamomile"),famTile("wash","O","Sweet Orange"),famTile("wash","R","Bulgarian Rose"))),
+ SEC(L(T(PH("DSC09917"))),L(textTile("var(--Vt)",null,`<span class="k">Wash, then polish</span><h2>Twice a week,<br><em>add a scrub.</em></h2><p>Sugar for a soft polish, salt for rough spots.</p><span class="cta">Shop body scrub</span>`,"scrub"))),
+ GRID(["B07QMP5CWL","B0FYNKSBF7","B07QQVP859","B0FYNCXX4Y","B0949JV8BV","B09NQLXLT3","B09NQNGPP2","B0FDJ6SQ3P","B09NQNLRLK","B0FDHZY6S2"],"Shop body wash"),FOOT()].join("");
+
+R.scrub=()=>[
+ SEC(L(textTile("var(--Vt)",null,`<span class="k" style="color:var(--V)">Gentle, everyday</span><h2 style="font-size:clamp(40px,7cqi,110px)">Sugar</h2><p>Fine sugar crystals for a soft polish. Tahitian Vanilla, Tropical Coconut, Bulgarian Rose.</p><span class="cta">Shop sugar scrub</span>`,"scrub")),L(textTile("var(--Lt)",null,`<span class="k" style="color:var(--L)">Deeper, rough spots</span><h2 style="font-size:clamp(40px,7cqi,110px)"><em>Salt</em></h2><p>Mineral salt for heels, elbows and knees. Lavender Chamomile, Sweet Orange.</p><span class="cta">Shop salt scrub</span>`,"scrub"))),
+ BGV("scrub",`<span class="k">Body Scrub · 12 oz</span><h2>Polish,<br><em>don't punish.</em></h2>`),
+ SEC(L(T(PH("tx_SCRUB"))),L(textTile("#f4efe7",null,`<span class="k">How to use</span><h2>Wet. Circle.<br><em>Lock it in.</em></h2><p>01 Apply to warm, damp skin in the shower.<br>02 Massage in small circles, then rinse.<br>03 Follow with body cream.</p><span class="cta">Shop body cream</span>`,"cream"))),
+ SEC(L(famTile("scrub","V","Tahitian Vanilla")),S4(famTile("scrub","C","Tropical Coconut"),famTile("scrub","R","Bulgarian Rose"),famTile("scrub","L","Lavender Chamomile"),famTile("scrub","O","Sweet Orange"))),
+ GRID(["B07R6YFQBL","B0BJ2932Z3","B091MNJHD9","B07RCMMJRH","B0BJ2M8XGB"],"Shop body scrub"),FOOT()].join("");
+
+R.bombs=()=>[
+ SEC(L(T(PH("DSC09784"))),L(textTile("#21323d","#f1ece3",`<span class="k">Bath Bombs</span><h2>Drop. Fizz.<br><em>Unwind.</em></h2><p>Two 6 oz bath bombs in every box.</p><span class="cta" style="--ctab:#fff;--ctaf:#21323d">Shop bath bombs</span>`,"bombs"))),
+ STRIP("Four scents, <em>four moods.</em>"),
+ SEC(S4(famTile("bombs","V","Tahitian Vanilla"),famTile("bombs","C","Tropical Coconut"),famTile("bombs","L","Lavender Chamomile"),famTile("bombs","O","Sweet Orange")),L(T(PH("DSC03477"),{go:"gifts",scrim:true,fg:"#fff",txt:`<span class="k">Gift idea</span><h3>A bath night,<br><em>wrapped.</em></h3><span class="cta" style="--ctab:#fff;--ctaf:#1b2420">Shop gifts</span>`}))),
+ GRID(["B09RHTPV77","B09RHVXHQJ","B09RHVVKNK","B09RHWWHY6"],"Shop bath bombs"),FOOT()].join("");
+
+R.bar=()=>[
+ BGV("bar",`<span class="k">Artisan soap · 1 lb loaf, cutter and board</span><h2>Cut from<br><em>the loaf.</em></h2>`),
+ STRIP("Five loaves, <em>five moods.</em>"),
+ SEC(L(T(SC("IMG0067_1"),{go:"bar",bg:"#ece6f4",contain:true,txt:`<h3 style="color:#5d4a8a"><em>Plumeria Violet</em></h3>`,pos:"lab"})),S4(...[["IMG0030","Mango Papaya","#fbe7d6","#b5541f"],["IMG0044","Patchouli Rose","#f3e3e3","#8a3f4f"],["IMG0089","Minty Oat","#e5efe6","#3f6b4a"],["IMG0041","Citrus","#fbf1cf","#8a6c0c"]].map(([i,n,b,c])=>T(SC(i),{go:"bar",bg:b,contain:true,txt:`<h4 style="color:${c}">${n}</h4>`,pos:"lab"})))),
+ SEC(L(T(PH("DSC09840"))),L(textTile("#f4efe7",null,`<span class="k">Variety packs</span><h2>Twelve squares,<br><em>twelve scents.</em></h2><p>Handmade artisan soap in packs of 6 and 12.</p><span class="cta">Shop variety packs</span>`,"bar"))),
+ STRIP("Classic bars, <em>five scents.</em>"),
+ SEC(L(famTile("bar","V","Tahitian Vanilla")),S4(famTile("bar","C","Tropical Coconut"),famTile("bar","L","Lavender Chamomile"),famTile("bar","O","Sweet Orange"),famTile("bar","R","Bulgarian Rose"))),
+ SEC(L(textTile("var(--Rt)",null,`<span class="k" style="color:var(--R)">Heart sets</span><h2>Little hearts,<br><em>big gift.</em></h2><p>Mini heart-shaped artisan bars in a window box.</p><span class="cta">Shop gift sets</span>`,"gifts")),L(T(PH("DSC09904")))),
+ GRID(["B07TVKLRMH","B0G23CHWZF","B0GDRZK6H8","B0G233Y2JD","B0G22WSD9J","B0G224SRZT","B0G225KJ71","B0G225KK5P","B0G23DWZD9","B0G236M5B6","B07R7B7KCB","B0BJ27D4T8","B07R7DM9RH","B0BJ2CH99V","B0949JBK7X"],"Shop soap"),FOOT()].join("");
+
+R.hand=()=>[
+ FW(`<img src="${PH("DSC03652")}" alt="" style="object-position:center 40%"><div class="bk bl" style="--fg:#fff"><span class="k">Liquid Hand Soap · 12 fl oz</span><h2>Pretty enough<br><em>to leave out.</em></h2></div>`,{ratio:"2.4/1",cls:"scrim"}),
+ SEC(L(famTile("hand","V","Tahitian Vanilla")),MS(textTile("#f4efe7",null,`<h3>Three scents, <em>by the sink.</em></h3><p>Moisturizing formula with aloe vera.</p>`),famTile("hand","L","Lavender Chamomile"),famTile("hand","O","Sweet Orange"))),
+ STRIP("Shop <em>hand soap.</em>"),
+ SEC(L(PT("B09MQYNGPN")),M2(PT("B0BJ2NP2DD"),PT("B09NQLBL2F"))),
+ FW(`<img src="${PH("DSC03602")}" alt=""><div class="bk bl" style="--fg:#fff"><h2>Clean hands,<br><em>soft hands.</em></h2></div>`,{ratio:"3/1",cls:"scrim"}),FOOT()].join("");
+
+R.scents=()=>[
+ FW(`<img src="${PH("DSC03450")}" alt=""><div class="bk bl" style="--fg:#fff"><span class="k">The Scent Atelier</span><h2>Pick a scent.<br><em>Keep it all day.</em></h2></div>`,{ratio:"3/1",cls:"scrim"}),
+ SEC(L(scentTile("V")),S4(scentTile("C","cream","S"),scentTile("L","cream","S"),scentTile("O","cream","S"),scentTile("R","cream","S"))),
+ STRIP("One scent, <em>every step.</em>"),
+ `<div class="mxg"><table><thead><tr><th></th>${SO.map(k=>`<th style="color:${S[k].hex}"><b>${S[k].no}</b>${S[k].n}</th>`).join("")}</tr></thead><tbody>${RIT.map(f=>`<tr><td class="l">${FN[f]}</td>${SO.map(k=>`<td>${SP[f][k]?`<div class="c" style="--t:${S[k].t}"><img src="${SC(SP[f][k])}" alt=""></div>`:""}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`,
+ FOOT()].join("");
+
+SO.forEach(k=>{R["s"+k]=()=>{const s=S[k];const fams=RIT.filter(f=>SP[f][k]&&f!=="cream");const asins=RIT.map(f=>AS[f][k]).filter(Boolean);
+ const others=SO.filter(o=>o!==k);const first=fams.slice(0,4);const rest=fams.slice(4);
+ const pool=[...others];const extra=[["DSC03477","Gift sets","gifts"],["DSC09840","Artisan soap","bar"]];const nextScent=()=>pool.length?scentTile(pool.shift(),"cream","S"):(([i,n,g])=>T(PH(i),{go:g,scrim:true,fg:"#fff",txt:`<h4>${n}</h4>`,pos:"lab"}))(extra.shift());
+ const firstTiles=[0,1,2,3].map(i=>first[i]?famTile(first[i],k):nextScent());
+ const fill=[...rest.map(f=>famTile(f,k))];while(fill.length<4)fill.push(nextScent());
+ return [
+ FW(`<span class="num" style="--c:${s.c};opacity:.14">${s.no}</span><img src="${SC(SP.cream[k])}" alt="" style="position:absolute;right:4%;top:0;height:100%;width:auto;mix-blend-mode:multiply"><div class="bk cl" style="--fg:${s.hex};right:auto;max-width:55%"><span class="k">No. ${s.no}</span><h2 style="font-size:clamp(40px,7cqi,110px)"><em>${s.n}</em></h2><p style="color:#1b2420">${s.mood}. One scent for every step: cleanse, polish, soak and moisturize.</p><span class="cta" style="--ctab:${s.hex}">Shop the collection</span></div>`,{bg:s.t,ratio:"2.4/1",go:"#grid"}),
+ STRIP(`The ${s.n} <em>wardrobe.</em>`),
+ SEC(L(famTile("cream",k,"Body Cream")),S4(...firstTiles)),
+ SEC(S4(...fill),L(T(PH(s.hdr),{scrim:true,fg:"#fff",txt:`<span class="k">The ritual</span><h3>Cleanse. Polish.<br><em>Soak. Moisturize.</em></h3>`}))),
+ GRID(asins,`Shop ${s.n}`),FOOT()].join("")}});
+
+R.gifts=()=>[
+ SEC(L(T(PH("DSC03468"))),L(textTile("var(--wine)","#fff",`<span class="k">The Holiday Gift Shop</span><h2>Gifts that smell<br><em>like a spa day.</em></h2><p>Handcrafted, plant-based and ready to wrap.</p><span class="cta" style="--ctab:#fff;--ctaf:#6e1626">Shop spa sets</span>`,"#grid"))),
+ SEC(L(T(PH("DSC03581"),{go:"#grid",scrim:true,fg:"#fff",txt:`<span class="k">Nine pieces</span><h3>The spa <em>case.</em></h3>`})),M2(T(PH("DSC03571"),{go:"#grid",scrim:true,fg:"#fff",txt:`<h4>Heart gift boxes</h4>`,pos:"lab"}),T(PH("DSC09840"),{go:"bar",scrim:true,fg:"#fff",txt:`<h4>Soap gift sets</h4>`,pos:"lab"}))),
+ BGV("gift",`<span class="k">The spa case</span><h2>Open it.<br><em>Breathe in.</em></h2>`),
+ STRIP("One case, <em>many scents.</em>"),
+ SEC(L(T(PH("bd_DSC01280"),{go:"#grid",bg:"#fff",txt:`<h3 style="color:var(--V)"><em>Tahitian Vanilla</em></h3>`,pos:"lab"})),S4(T(PH("bd_DSC01276-2"),{go:"#grid",bg:"#fff",txt:`<h4 style="color:var(--L)">Lavender Chamomile</h4>`,pos:"lab"}),T(PH("bd_DSC01286"),{go:"#grid",bg:"#fff",txt:`<h4 style="color:var(--O)">Sweet Orange</h4>`,pos:"lab"}),T(PH("bd_DSC09691"),{go:"#grid",bg:"#fff",txt:`<h4 style="color:var(--R)">Heart box</h4>`,pos:"lab"}),T(PH("bd_DSC09712"),{go:"#grid",bg:"#fff",txt:`<h4 style="color:var(--R)">Heart box</h4>`,pos:"lab"}))),
+ TT(`<h3>Gift ideas</h3><dl><dt>For mom</dt><dd>Spa sets and lavender</dd><dt>For her</dt><dd>Rose and heart soap sets</dd><dt>Self-care</dt><dd>Bath bombs and body scrub</dd><dt>Stocking stuffers</dt><dd>Mini heart soaps and classic bars</dd></dl>`,{bg:"#f7f5f1"}),
+ GRID(["B0GDS5Q29D","B07RRZ6BLM","B0GDRRK87W","B07TVKLRMH","B0G233Y2JD","B0G22WSD9J","B0GDRZK6H8","B09RHTPV77","B09RHVVKNK","B07R7B7KCB"],"Shop gifts"),FOOT()].join("");
+
+R.story=()=>[
+ SEC(L(T(PH("DSC03450"))),L(textTile("var(--navy)","#f1ece3",`<span class="k">Our story</span><h2>Two chefs.<br><em>One rule.</em></h2><p><em>What goes on the body goes into the body.</em></p>`))),
+ TT(`<h3>Handcrafted since 2013</h3><p>Saavy Naturals was founded in 2013 by Hugo and Debra Saavedra, two trained chefs who wanted body care made the way they cook: with real, plant-based ingredients and nothing hidden. Every product is still handcrafted in small batches in California.</p>`,{bg:"#f7f5f1"}),
+ BGV("story",`<h2>Made by hand,<br><em>batch by batch.</em></h2>`),
+ TT(`<h3>Ingredient Integrity Pledge</h3><p>Made without parabens, sulfates, silicones, phenoxyethanol, propylene glycol, PEGs, petroleum or artificial colors.</p><div class="row"><span>Plant-based</span><span>Vegan</span><span>Cruelty-free</span><span>Gluten-free</span><span>Soy-free</span></div>`,{bg:"#f4efe7"}),
+ GAL(["DSC03724","DSC09928","DSC03355","DSC03749","DSC09868","DSC03696"]),FOOT()].join("");
+
+R.all=()=>[GRID(Object.keys(P),"All products"),FOOT()].join("");
+
+/* ---- chrome & routing ---- */
+const NAV=[["home","Home"],["best","Best Sellers"],["products","Shop by Product",["cream","butter","wash","scrub","bombs","bar","hand"]],["scents","Shop by Scent",SO.map(k=>"s"+k)],["gifts","Gift Shop"],["story","Our Story"],["all","Shop All"]];
+const NM={cream:"Body Cream",butter:"Whipped Body Butter",wash:"Body Wash",scrub:"Body Scrub",bombs:"Bath Bombs",bar:"Bar Soap & Loaves",hand:"Liquid Hand Soap"};SO.forEach(k=>NM["s"+k]=S[k].n);
+const HDR={home:"DSC03450",best:"DSC09840",products:"DSC09784",cream:"DSC09928",butter:"DSC03724",wash:"DSC09917",scrub:"DSC03757",bombs:"DSC09784",bar:"DSC03749",hand:"DSC03602",scents:"DSC09868",gifts:"DSC03566",story:"DSC03355",all:"DSC03450"};
+SO.forEach(k=>HDR["s"+k]=S[k].hdr);
+let cur="home",open=null;
+const nav=()=>NAV.map(([id,l,sub])=>{const a=cur===id||(sub&&sub.includes(cur));return `<span class="w"><button data-nav="${id}" ${sub?`data-sub="1" aria-expanded="${open===id}"`:""} aria-current="${a}">${l}${sub?" ▾":""}</button>${sub&&open===id?`<div class="dd">${sub.map(s=>`<button data-go="${s}">${s[0]==="s"&&S[s[1]]?`<i style="background:${S[s[1]].hex}"></i>`:""}${NM[s]}</button>`).join("")}<button data-go="${id}" style="border-top:1px solid #eee;font-weight:700">All</button></div>`:""}</span>`}).join("");
+function go(id){if(id==="#grid"){const g=document.getElementById("grid");if(g)g.scrollIntoView({behavior:"smooth",block:"start"});return}
+ if(!R[id])return;cur=id;open=null;
+ document.getElementById("hero").innerHTML=`<img src="${PH(HDR[id]||"DSC03450")}" alt="">`;
+ document.getElementById("nav").innerHTML=nav();
+ const pg=document.getElementById("page");pg.innerHTML=R[id]();
+ pg.querySelectorAll("[data-go]").forEach(e=>{if(e.dataset.go===id)e.dataset.go="#grid"});
+ pg.querySelectorAll("video").forEach(v=>{v.muted=true;const p=v.play();if(p&&p.catch)p.catch(()=>{})});
+ window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})}
+document.addEventListener("click",e=>{const n=e.target.closest("[data-nav]");
+ if(n){const id=n.dataset.nav;if(n.dataset.sub){open=open===id?null:id;document.getElementById("nav").innerHTML=nav();return}go(id);return}
+ const g=e.target.closest("[data-go]");if(g){e.preventDefault();go(g.dataset.go);return}
+ if(open&&!e.target.closest(".nav")){open=null;document.getElementById("nav").innerHTML=nav()}});
+go("home");
+</script>
+
+</body>
+</html>
